@@ -25,6 +25,17 @@ fn makes_copy(some_integer: i32) { // some_integer comes into scope
     println!("{some_integer}");
 } // Here, some_integer goes out of scope. Nothing special happens.
 
+fn first_word(s: &str) -> &str{
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+    &s[..]
+}
+
+
 fn reference_ex(){
     let s1 = String::from("hello");
     let len = calculate_length(&s1);
@@ -71,4 +82,12 @@ fn main() {
     ownership_funcs();
 
     reference_ex();
+
+    let some_str = String::from("hello world");
+
+    let first_word = first_word(&some_str);
+    // println!("first_word is {}", first_word);
+    s.clear();
+    println!("the first word is: {first_word}");
+
 }
