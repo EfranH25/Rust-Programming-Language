@@ -1,0 +1,11 @@
+[package]
+name = "ch9-error-handling"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+# abort out of stack after panic occurs instead of unwinding
+# abort better to use if you want resultant binary as small as possible
+#[profile.release]
+#panic = "abort"
