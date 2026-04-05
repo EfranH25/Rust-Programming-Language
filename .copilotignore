@@ -1,0 +1,16 @@
+     # Ignore environment and secret files
+     .env
+     secrets.json
+     config/private_keys.pem
+
+     # Ignore build artifacts and caches
+     target/
+     Cargo.lock  # If you want to avoid dependency suggestions from lock files
+
+     # Ignore specific directories (e.g., if they contain sensitive data)
+     ch*/target/  # Ignores all target dirs in chapter folders
+     .git/
+
+     # Ignore large or irrelevant files
+     *.log
+     output.txt  # From your ch12 example
