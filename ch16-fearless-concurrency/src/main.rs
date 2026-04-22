@@ -1,6 +1,6 @@
+use std::sync::{Arc, Mutex, mpsc};
 use std::thread;
 use std::time::Duration;
-use std::sync::{Mutex, mpsc, Arc};
 
 // Race condition Note:
 // Race conditions, in which threads are accessing data or resources in an inconsistent order
@@ -32,7 +32,7 @@ fn example_thread() {
     handle.join().unwrap();
 }
 
-fn example_mpsc(){
+fn example_mpsc() {
     // Creates transmitter and receiver for thread
     let (tx, rx) = mpsc::channel();
 
@@ -61,7 +61,7 @@ fn example_mpsc(){
     }
 }
 
-fn example_mpsc_multi(){
+fn example_mpsc_multi() {
     let (tx, rx) = mpsc::channel();
 
     // Clones transmitter, making a new transmitter > new thread
@@ -96,10 +96,10 @@ fn example_mpsc_multi(){
 
     for received in rx {
         println!("Got: {received}");
-    };
+    }
 }
 
-fn example_mutexes(){
+fn example_mutexes() {
     // Mutex is an abbreviation for mutual exclusion, as in a mutex allows only one thread to access some data at any given time. To access the data in a mutex, a thread must first signal that it wants access by asking to acquire the mutex’s lock. The lock is a data structure that is part of the mutex that keeps track of who currently has exclusive access to the data. Therefore, the mutex is described as guarding the data it holds via the locking system.
     // Mutexes have a reputation for being difficult to use because you have to remember two rules:
     //  You must attempt to acquire the lock before using the data.
@@ -110,7 +110,7 @@ fn example_mutexes(){
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
 
-    for _ in 0..10{
+    for _ in 0..10 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
             let mut num = counter.lock().unwrap();
@@ -120,11 +120,10 @@ fn example_mutexes(){
         });
         handles.push(handle);
     }
-    for handle in handles{
+    for handle in handles {
         handle.join().unwrap();
     }
     println!("Result: {}", *counter.lock().unwrap());
-
 }
 fn main() {
     // Note: Very little of how Rust handles concurrency is part of the language, many concurrency solutions are implemented as crates. These evolve more quickly than the standard library, so be sure to search online for the current, state-of-the-art crates to use in multithreaded situations.
